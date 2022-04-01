@@ -77,7 +77,7 @@ exports.addData = async (req, res) => {
     });
     const obj = JSON.parse(JSON.stringify(req.body));
     ans.push(obj);
-    fields = ["title", "isbn", "author", "description"];
+    fields = ["title", "isbn", "authors", "description"];
     opts = { fields, delimiter: ";" };
   } else if (type == "authors") {
     ans = [];
@@ -103,7 +103,7 @@ exports.addData = async (req, res) => {
     });
     const obj = JSON.parse(JSON.stringify(req.body));
     ans.push(obj);
-    fields = ["title", "isbn", "author", "publishedAt"];
+    fields = ["title", "isbn", "authors", "publishedAt"];
     opts = { fields, delimiter: ";" };
   }
   try {
@@ -121,10 +121,11 @@ exports.addData = async (req, res) => {
 exports.sauth = (req, res) => {
   if (req.body.field === "email") {
     let text = req.body.text.toLowerCase();
+    console.log(text);
     switch (`${req.body.type}`) {
       case "books":
         if (text != "") {
-          console.log(ans);
+          // console.log(ans);
           let updated = ans.filter((a) =>
             a.authors.toLowerCase().includes(text)
           );
