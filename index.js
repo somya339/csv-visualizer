@@ -12,6 +12,6 @@ app.use(
   })
 );
 app.use(Router);
-app.listen(process.env.PORT | 3000, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log(`server live on ${process.env.PORT | 3000}`);
 });
