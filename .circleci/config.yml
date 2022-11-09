@@ -15,7 +15,7 @@ jobs:
           command: npm run start
           name: Start app
       - persist_to_workspace:
-          root: ~
+          root: ~/
           paths:
             - .
   deploy_job : 
@@ -32,5 +32,5 @@ workflows :
       - build_job
       - deploy_job :
           requires : 
-            - build-job
+            - build_job
       
