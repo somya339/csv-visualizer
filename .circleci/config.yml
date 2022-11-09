@@ -1,0 +1,34 @@
+version : 2.1
+
+orbs:
+  node: circleci/node@5.0.2
+  heroku: circleci/heroku@1.2.6
+
+jobs:
+  build_job : 
+    executor : node/default
+    steps : 
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+      - run:
+          command: npm run start
+          name: Start app
+      - persist_to_workspace:
+          root: ~
+          paths:
+            - .
+  deploy_job : 
+    executor : heroku/default
+    steps :
+      - attach_workspace:
+          at: ~/project
+      - heroku/deploy-via-git:
+          force: true
+
+workflow : 
+  start_app :
+    jobs :
+      - build_job
+      - deploy_job
+      
