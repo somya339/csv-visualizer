@@ -26,9 +26,11 @@ jobs:
       - heroku/deploy-via-git:
           force: true
 
-workflow : 
+workflows : 
   start_app :
     jobs :
       - build_job
-      - deploy_job
+      - deploy_job :
+          requires : 
+            - build-job
       
